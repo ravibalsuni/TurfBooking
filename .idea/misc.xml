@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/drawable-v24/background_login.xml" value="0.1" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/drawable-v24/ic_menu_gallery.xml" value="0.1585" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/drawable-v24/side_nav_bar.xml" value="0.123" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/drawable/background_login.xml" value="0.1395" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/drawable/background_signup.xml" value="0.1395" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/drawable/new_login_gradients.xml" value="0.1395" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/activity_admin_login.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/activity_approval_admin.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/activity_approval_booking.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/activity_approval_booking_admin.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/activity_approval_turf.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/activity_approval_turf_owner.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/activity_booking.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/activity_home.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/activity_login.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/activity_login_sucess.xml" value="0.25" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/activity_main.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/activity_owner_login.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/activity_register.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/activity_turf_booking.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/activity_user_login.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/app_bar_main.xml" value="0.1" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/app_bar_main_admin.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/app_bar_main_owner.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/app_bar_main_user.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/content_main.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/content_main_admin.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/content_main_owner.xml" value="0.1" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/content_main_user.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/fragment_addturf.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/fragment_approvebooking.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/fragment_approveturf.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/fragment_booknow.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/fragment_gallery.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/fragment_home.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/fragment_logout.xml" value="0.1" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/fragment_mybooking.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/fragment_pendingapproval.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/fragment_slideshow.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/layout/nav_header_main.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/menu/activity_main_drawer.xml" value="0.1" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/menu/activity_main_drawer_admin.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/menu/activity_main_drawer_owner.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/menu/activity_main_drawer_user.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AndroidStudioProjects/TurfBooking/app/src/main/res/menu/main.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AppData/Local/Android/Sdk/platforms/android-33/android.jar!/res/layout/input_method_nav_home_handle.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/X360/AppData/Local/Android/Sdk/platforms/android-33/data/res/layout/input_method_nav_home_handle.xml" value="0.14479166666666668" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

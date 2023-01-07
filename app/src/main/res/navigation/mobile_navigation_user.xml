@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation_user"
+    app:startDestination="@+id/nav_book_now">
+
+    <fragment
+        android:id="@+id/nav_my_booking"
+        android:name="com.example.turfbooking.ui.mybooking.MyBookingFragment"
+        android:label="@string/menu_my_booking"
+        tools:layout="@layout/fragment_mybooking" />
+
+    <fragment
+        android:id="@+id/nav_book_now"
+        android:name="com.example.turfbooking.ui.booknow.BookNowFragment"
+        android:label="@string/menu_book_now"
+        tools:layout="@layout/fragment_booknow" />
+
+</navigation>

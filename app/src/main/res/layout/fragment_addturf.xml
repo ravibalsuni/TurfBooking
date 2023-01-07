@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/new_login_gradients"
+    android:orientation="vertical"
+    android:paddingBottom="16dp"
+    android:paddingLeft="18dp"
+    android:paddingRight="18dp"
+    android:paddingTop="16dp"
+    tools:context=".ui.addturf.AddTurfFragment">
+
+    <EditText
+        android:id="@+id/etTurfName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:inputType="text"
+        android:padding="8dp"
+        android:hint="Turf Name"
+        android:textColorHint="#ffffff"
+        android:maxLines="1"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#f9d7db" />
+    <EditText
+        android:id="@+id/etTurfPin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:inputType="text"
+        android:padding="8dp"
+        android:hint="Pin code of turf"
+        android:textColorHint="#ffffff"
+        android:maxLines="1"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#f9d7db" />
+    <EditText
+        android:id="@+id/etTurfAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:inputType="text"
+        android:padding="8dp"
+        android:hint="Address Line"
+        android:textColorHint="#ffffff"
+        android:maxLines="2"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#f9d7db" />
+    <EditText
+        android:id="@+id/etOwnerId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:inputType="text"
+        android:padding="8dp"
+        android:hint="Owner Id"
+        android:textColorHint="#ffffff"
+        android:maxLines="1"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#f9d7db" />
+    <Spinner
+        android:id="@+id/spinnerTurfStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:inputType="text"
+        android:padding="8dp"
+        android:textColorHint="#ffffff"
+        android:spinnerMode="dropdown" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#f9d7db" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnAddTurfSubmit"
+        android:background="@drawable/background_login"
+        android:text="Submit"
+        android:textAllCaps="false"
+        android:textStyle="normal"
+        android:layout_marginTop="30dp"
+        style="@style/Base.TextAppearance.AppCompat.Body1"
+        android:textSize="18sp"
+        android:textColor="#f16f7d"
+        android:padding="16dp"
+        android:clickable="true"/>
+</LinearLayout>
