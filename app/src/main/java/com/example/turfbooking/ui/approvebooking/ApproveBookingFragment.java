@@ -18,14 +18,11 @@ public class ApproveBookingFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        ApproveBookingModel galleryViewModel =
-                new ViewModelProvider(this).get(ApproveBookingModel.class);
 
         binding = FragmentApprovebookingBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
         final TextView textView = binding.textPendingApproval;
-        galleryViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        textView.setText("Pending Turf Booking For Approval");
         return root;
     }
 

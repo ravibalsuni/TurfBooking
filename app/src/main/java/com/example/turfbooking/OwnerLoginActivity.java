@@ -42,8 +42,9 @@ public class OwnerLoginActivity extends AppCompatActivity {
         String activityName = null;
         if(intent !=null)
             activityName = intent.getStringExtra("activity");
+        System.out.println("Owner login actiivity - activityName - "+activityName);
         if(activityName != null ){
-            Intent i= new Intent(OwnerLoginActivity.this, ApproveTurfActivity.class);
+            Intent i= new Intent(OwnerLoginActivity.this, ApproveBookingActivity.class);
             startActivity(i);
         }
         tvRegister = findViewById(R.id.tvRegister_owner);

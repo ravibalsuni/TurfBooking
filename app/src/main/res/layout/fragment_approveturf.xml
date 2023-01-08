@@ -1,35 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/new_login_gradients"
-    android:orientation="vertical"
-    android:paddingBottom="16dp"
-    android:paddingLeft="18dp"
-    android:paddingRight="18dp"
-    android:paddingTop="16dp"
+    android:background="#fff"
     tools:context=".ui.approveturf.ApproveTurfFragment">
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#f9d7db" />
-    <EditText
-        android:id="@+id/etApproveTurf"
+
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@android:color/transparent"
-        android:drawablePadding="12dp"
-        android:ems="10"
-        android:inputType="text"
-        android:padding="8dp"
-        android:hint="Approve Turf Fragment"
-        android:textColorHint="#ffffff"
-        android:maxLines="1"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#f9d7db" />
+        android:id="@+id/recyclerView" />
 
-</LinearLayout>
+</FrameLayout>

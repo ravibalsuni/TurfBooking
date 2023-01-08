@@ -1,5 +1,6 @@
 package com.example.turfbooking.ui.addturf;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,19 +11,18 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import com.example.turfbooking.AdminLoginActivity;
-import com.example.turfbooking.ApproveTurfActivity;
+import com.example.turfbooking.ApproveBookingActivity;
+import com.example.turfbooking.OwnerLoginActivity;
 import com.example.turfbooking.R;
 import com.example.turfbooking.constants.Constants;
 import com.example.turfbooking.databinding.FragmentAddturfBinding;
-import com.example.turfbooking.databinding.FragmentBooknowBinding;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.json.JSONObject;
@@ -41,6 +41,7 @@ public class AddTurfFragment extends Fragment {
     private String turfName,turfPin,turfAddress,ownerId, status;
     private Spinner dropdown;
     private Button submit;
+    private String myResponse;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -92,11 +93,13 @@ public class AddTurfFragment extends Fragment {
         @Override
         protected JSONObject doInBackground(String... params) {
             Map postData = new HashMap();
+            postData.put("id",1);
             postData.put("name",turfName);
             postData.put("pin",turfPin);
             postData.put("address",turfAddress);
             postData.put("ownerId",ownerId);
             postData.put("turfStatus",status);
+            postData.put("approvalStatus","Pending");
             return post(TEST_URL,postData);
         }
 
@@ -109,6 +112,10 @@ public class AddTurfFragment extends Fragment {
             try {
                 if (response != null) {
                     Toast.makeText(getActivity(), "save success", Toast.LENGTH_LONG).show();
+                    etTurfName.setText("");
+                    etTurfPin.setText("");
+                    etTurfAddress.setText("");
+                    etOwnerId.setText("");
                 }else {
                     Toast.makeText(getActivity(), "save error", Toast.LENGTH_SHORT).show();
                 }
@@ -116,6 +123,7 @@ public class AddTurfFragment extends Fragment {
                 e.printStackTrace();
                 Toast.makeText(getActivity(), String.format("%s","Something went wrong!!!!!!"), Toast.LENGTH_LONG).show();
             }
+            myResponse=response.toString();
             System.out.println(response);
         }
     }

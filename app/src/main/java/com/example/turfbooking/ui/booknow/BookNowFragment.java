@@ -18,14 +18,12 @@ public class BookNowFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        BookNowModel galleryViewModel =
-                new ViewModelProvider(this).get(BookNowModel.class);
 
         binding = FragmentBooknowBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textBookNow;
-        galleryViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+       
         return root;
     }
 

@@ -42,6 +42,7 @@ public class UserLoginActivity extends AppCompatActivity {
         String activityName = null;
         if(intent !=null)
             activityName = intent.getStringExtra("activity");
+        System.out.println("user login activityName - "+activityName);
         if(activityName != null ){
             Intent i= new Intent(UserLoginActivity.this, TurfBookingActivity.class);
             startActivity(i);
@@ -69,7 +70,7 @@ public class UserLoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i= new Intent(UserLoginActivity.this, RegisterActivity.class);
-                i.putExtra("activity","LoginActivity");
+                i.putExtra("activity","UserLoginActivity");
                 startActivity(i);
                 finish();
             }

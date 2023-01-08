@@ -63,10 +63,14 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = getIntent();
                 String activityName=i.getStringExtra("activity");
-                if(activityName.equals("LoginActivity"))
+                System.out.println("activityName - "+activityName);
+                if(activityName.equals("UserLoginActivity"))
                  startActivity(new Intent(RegisterActivity.this, UserLoginActivity.class));
-                else
+                else if(activityName.equals("AdminLoginActivity"))
                     startActivity(new Intent(RegisterActivity.this, AdminLoginActivity.class));
+                else if(activityName.equals("OwnerLoginActivity"))
+                    startActivity(new Intent(RegisterActivity.this, OwnerLoginActivity.class));
+                else
                 finish();
             }
         });
@@ -109,14 +113,29 @@ public class RegisterActivity extends AppCompatActivity {
             //All your UI operation can be performed here
             //Response string can be converted to JSONObject/JSONArray like
             System.out.println("response - "+response);
+            Intent intent = getIntent();
+            String activityName=intent.getStringExtra("activity");
+            System.out.println("in Register activity - activityName - "+activityName);
             try {
                 if (response != null) {
-                    if (response.toString().contains("SUCCESS")) {
+                    if (response.toString().contains("SUCCESS") && activityName.equals("UserLoginActivity")) {
                         Intent i= new Intent(RegisterActivity.this, UserLoginActivity.class);
                         i.putExtra("activity","RegisterActivity");
                         startActivity(i);
                         Toast.makeText(getApplicationContext(), "Registration Successful", Toast.LENGTH_LONG).show();
-                    } else {
+                    } else if(response.toString().contains("SUCCESS") && activityName.equals("OwnerLoginActivity")) {
+                        Intent i= new Intent(RegisterActivity.this, OwnerLoginActivity.class);
+                        i.putExtra("activity","RegisterActivity");
+                        startActivity(i);
+                        Toast.makeText(getApplicationContext(), "Registration Successful", Toast.LENGTH_LONG).show();
+
+                    } else if(response.toString().contains("SUCCESS") && activityName.equals("AdminLoginActivity")) {
+                        Intent i= new Intent(RegisterActivity.this, AdminLoginActivity.class);
+                        i.putExtra("activity","RegisterActivity");
+                        startActivity(i);
+                        Toast.makeText(getApplicationContext(), "Registration Successful", Toast.LENGTH_LONG).show();
+                    }
+                    else{
                         Toast.makeText(getApplicationContext(), "Registration Error", Toast.LENGTH_SHORT).show();
                     }
                 }
