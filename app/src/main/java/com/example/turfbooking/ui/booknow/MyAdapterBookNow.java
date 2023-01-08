@@ -1,19 +1,18 @@
-package com.example.turfbooking.ui.approveturf;
+package com.example.turfbooking.ui.booknow;
 
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.turfbooking.R;
+import com.example.turfbooking.ui.approveturf.ItemClickListener;
+import com.example.turfbooking.ui.approveturf.TurfModel;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
+public class MyAdapterBookNow extends RecyclerView.Adapter<MyAdapterBookNow.MyViewHolder>{
 
     // 4- Handling the Click Events
     public ItemClickListener clickListener;
@@ -22,7 +21,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
     // 1- Data Source
     private TurfModel[] listData;
 
-    public MyAdapter(TurfModel[] listData) {
+    public MyAdapterBookNow(TurfModel[] listData) {
         this.listData = listData;
     }
 
@@ -68,8 +67,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
          holder.textView2.setText(listData[position].getName().toString());
-        holder.textView3.setText(listData[position].getTurfStatus().toString());
-        holder.textView4.setText("Tap to Approve");
+        holder.textView3.setText(listData[position].getPin().toString());
+        holder.textView4.setText("Book Now");
     }
 
     @Override

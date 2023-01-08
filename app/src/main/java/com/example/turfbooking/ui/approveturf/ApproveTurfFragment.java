@@ -1,6 +1,5 @@
 package com.example.turfbooking.ui.approveturf;
 
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,15 +13,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.turfbooking.AdminLoginActivity;
-import com.example.turfbooking.R;
 import com.example.turfbooking.constants.Constants;
 import com.example.turfbooking.databinding.FragmentApproveturfBinding;
-import com.example.turfbooking.ui.addturf.AddTurfFragment;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
@@ -43,16 +39,10 @@ public class ApproveTurfFragment extends Fragment implements ItemClickListener {
     String TEST_URL = Constants.BASE_URL + "/api/turf/search/status/pending";
     int globalPos = 0;
     private FragmentApproveturfBinding binding;
-    private Button approve;
-    private TextView tv_id;
-    // 1- AdapterView: RecyclerView
-    RecyclerView recyclerView;
 
-    // 2- Data Source:
     TurfModel[] myListData1;
 
-    // 3- Adapter
-    MyAdapter adapter;
+    MyAdapterApproveTurf adapter;
     View root;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -91,7 +81,7 @@ public class ApproveTurfFragment extends Fragment implements ItemClickListener {
         final RecyclerView recyclerView = binding.recyclerView;
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
-        adapter = new MyAdapter(myListData1);
+        adapter = new MyAdapterApproveTurf(myListData1);
         recyclerView.setAdapter(adapter);
         // Handling the Click Events
         adapter.setClickListener(this);
