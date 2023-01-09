@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.turfbooking.R;
 
+import java.util.concurrent.ExecutionException;
+
 public class MyAdapterApproveTurf extends RecyclerView.Adapter<MyAdapterApproveTurf.MyViewHolder>{
 
     // 4- Handling the Click Events
@@ -47,7 +49,13 @@ public class MyAdapterApproveTurf extends RecyclerView.Adapter<MyAdapterApproveT
         @Override
         public void onClick(View view) {
             if (clickListener != null){
-                clickListener.onClick(view, getAdapterPosition());
+                try {
+                    clickListener.onClick(view, getAdapterPosition());
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

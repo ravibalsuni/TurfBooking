@@ -45,8 +45,8 @@ import java.util.concurrent.ExecutionException;
 public class BookNowFragment extends Fragment implements ItemClickListener {
 
     private FragmentBooknowBinding binding;
-    String TEST_URL = Constants.BASE_URL + "/api/turf/search/status/available";
     int globalPos = 0;
+    String userid;
 
     TurfModel[] myListData1;
 
@@ -55,7 +55,8 @@ public class BookNowFragment extends Fragment implements ItemClickListener {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         binding = FragmentBooknowBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         String result = "null";
@@ -102,25 +103,38 @@ public class BookNowFragment extends Fragment implements ItemClickListener {
     }
 
     @Override
-    public void onClick(View view, int pos) {
+    public void onClick(View view, int pos) throws ExecutionException, InterruptedException {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         System.out.println("pos - " + pos);
         globalPos = pos;
         System.out.println("data based on pos - " + myListData1[globalPos]);
-        JSONObject response = new PostAsyncTask().doInBackground();
-        if (response != null) {
-            Toast.makeText(getActivity(), "Approved Success", Toast.LENGTH_SHORT).show();
-            Intent i =new Intent(getActivity(), UserLoginActivity.class);
-            i.putExtra("activity","BookNowFragment");
-            startActivity(i);
+
+        Intent i1 = getActivity().getIntent();
+        userid=i1.getStringExtra("userid");
+        System.out.println("user id - "+userid);
+        String getResponse = new GetAsyncTask2().execute().get();
+        System.out.println("getResponse - "+getResponse);
+        if(getResponse.length() > 3) {
+            Toast.makeText(getActivity(), "Booking Already Exists", Toast.LENGTH_SHORT).show();
         }
-        else {
-            Toast.makeText(getActivity(), "Could Not Approve", Toast.LENGTH_SHORT).show();
+        else{
+            JSONObject response = new PostAsyncTask().doInBackground();
+            if (response != null) {
+                Toast.makeText(getActivity(), "Booking Success", Toast.LENGTH_SHORT).show();
+                Intent i =new Intent(getActivity(), UserLoginActivity.class);
+                i.putExtra("activity","BookNowFragment");
+                i.putExtra("userid",userid);
+                startActivity(i);
+            }
+            else {
+                Toast.makeText(getActivity(), "Could Not Approve", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
     private class GetAsyncTask extends AsyncTask<String, String, String> {
+        String TEST_URL = Constants.BASE_URL + "/api/turf/search/status/available";
         @Override
         protected String doInBackground(String... params) {
             BufferedReader reader = null;
@@ -160,8 +174,50 @@ public class BookNowFragment extends Fragment implements ItemClickListener {
         }
     }
 
+    private class GetAsyncTask2 extends AsyncTask<String, String, String> {
+        String API_URL = Constants.BASE_URL + "/api/turf/booking/search/createdby?createdBy="+userid;
+        @Override
+        protected String doInBackground(String... params) {
+            BufferedReader reader = null;
+            StringBuilder sb = new StringBuilder();
+            try {
+                URL url;
+                HttpURLConnection urlConnection = null;
+                try {
+                    url = new URL(API_URL);
+
+                    urlConnection = (HttpURLConnection) url
+                            .openConnection();
+
+                    InputStream in = urlConnection.getInputStream();
+
+                    InputStreamReader isw = new InputStreamReader(in);
+                    reader = new BufferedReader(isw);
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        sb.append(line);
+                    }
+                    return sb.toString();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    if (urlConnection != null) {
+                        urlConnection.disconnect();
+                    }
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "Exception: " + e.getMessage();
+            }
+            return sb.toString();
+        }
+    }
+
     private class PostAsyncTask extends AsyncTask<String, Void, JSONObject> {
         String UPDATE_URL = Constants.BASE_URL + "/api/turf/booking/save";
+        String UPDATE_STATUS_URL = Constants.BASE_URL + "/api/turf/update/status/notavailable";
 
         @Override
         protected void onPreExecute() {
@@ -170,6 +226,7 @@ public class BookNowFragment extends Fragment implements ItemClickListener {
 
         @Override
         protected JSONObject doInBackground(String... params) {
+            Intent i=getActivity().getIntent();
             Map postData = new HashMap();
             postData.put("turfId",myListData1[globalPos].getId());
             postData.put("availabilityStatus",myListData1[globalPos].getTurfStatus());
@@ -177,17 +234,59 @@ public class BookNowFragment extends Fragment implements ItemClickListener {
             postData.put("bookingDateTime", new Date().toString());
             postData.put("bookingStatus","Pending");
             postData.put("bookingTimeslot","1");
-            postData.put("createdBy","user");
+            postData.put("createdBy",i.getStringExtra("userid"));
             postData.put("createdDateTime",new Date().toString());
             postData.put("duration","1hr");
-            return post(UPDATE_URL, postData);
+
+            Map postData1 = new HashMap();
+            postData.put("id",myListData1[globalPos].getId());
+
+            return post(UPDATE_URL,UPDATE_STATUS_URL, postData, postData1);
         }
 
-        public JSONObject post(String REQUEST_URL, Map<String, Object> params) {
+        public JSONObject post(String REQUEST_URL,String REQUEST_URL1, Map<String, Object> params, Map<String, Object> params1) {
             JSONObject jsonObject = null;
             BufferedReader reader = null;
             try {
                 URL url = new URL(REQUEST_URL);
+                String postData = new ObjectMapper().writeValueAsString(params);
+                byte[] postDataBytes = postData.toString().getBytes("UTF-8");
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setRequestProperty("accept", "*/*");
+                connection.setConnectTimeout(8000);
+                connection.setRequestMethod("POST");
+                connection.setUseCaches(false);
+                connection.setDoOutput(true);
+                connection.getOutputStream().write(postDataBytes);
+                connection.connect();
+                StringBuilder sb;
+                int statusCode = connection.getResponseCode();
+                System.out.println("statusCode - " + statusCode);
+                if (statusCode == 200) {
+                    sb = new StringBuilder();
+                    reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        sb.append(line);
+                    }
+                    jsonObject = new JSONObject(sb.toString());
+                }
+                connection.disconnect();
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (reader != null) {
+                    try {
+                        reader.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            try {
+                URL url = new URL(REQUEST_URL1);
                 String postData = new ObjectMapper().writeValueAsString(params);
                 byte[] postDataBytes = postData.toString().getBytes("UTF-8");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();

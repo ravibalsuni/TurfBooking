@@ -12,6 +12,8 @@ import com.example.turfbooking.R;
 import com.example.turfbooking.ui.approveturf.ItemClickListener;
 import com.example.turfbooking.ui.approveturf.TurfModel;
 
+import java.util.concurrent.ExecutionException;
+
 public class MyAdapterBookNow extends RecyclerView.Adapter<MyAdapterBookNow.MyViewHolder>{
 
     // 4- Handling the Click Events
@@ -46,7 +48,13 @@ public class MyAdapterBookNow extends RecyclerView.Adapter<MyAdapterBookNow.MyVi
         @Override
         public void onClick(View view) {
             if (clickListener != null){
-                clickListener.onClick(view, getAdapterPosition());
+                try {
+                    clickListener.onClick(view, getAdapterPosition());
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

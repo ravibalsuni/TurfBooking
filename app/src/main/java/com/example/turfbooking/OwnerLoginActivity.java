@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -37,6 +39,8 @@ public class OwnerLoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         setContentView(R.layout.activity_owner_login);
         Intent intent = getIntent();
         String activityName = null;
@@ -61,7 +65,21 @@ public class OwnerLoginActivity extends AppCompatActivity {
                     Toast.makeText(OwnerLoginActivity.this, "Enter your Email and Password to login", Toast.LENGTH_SHORT).show();
                 } else {
                     activity= OwnerLoginActivity.this;
-                    new PostAsyncTask().execute();
+                    String response=new GetAsyncTask().doInBackground(phone);
+                    System.out.println("response - "+response);
+                    if (response != null) {
+                        if (response.toString().contains("owner")) {
+                            Intent i= new Intent(OwnerLoginActivity.this, ApproveBookingActivity.class);
+                            i.putExtra("role","admin");
+                            i.putExtra("userid", phone);
+                            startActivity(i);
+                            Toast.makeText(getApplicationContext(), "Login success", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Login Error Authentication Issue", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                    else
+                        Toast.makeText(getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -78,94 +96,46 @@ public class OwnerLoginActivity extends AppCompatActivity {
 
     }
 
-    private class PostAsyncTask extends AsyncTask<String,Void,JSONObject> {
+    private class GetAsyncTask extends AsyncTask<String, String, String> {
         @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected JSONObject doInBackground(String... params) {
-            Map postData = new HashMap();
-            postData.put("username",phone);
-            postData.put("password",password);
-            return post(TEST_URL,postData);
-        }
-
-        @Override
-        protected void onPostExecute(JSONObject response) {
-            super.onPostExecute(response);
-            //All your UI operation can be performed here
-            //Response string can be converted to JSONObject/JSONArray like
-            System.out.println("response - "+response);
+        protected String doInBackground(String... params) {
+            String USER_PROFILE=Constants.BASE_URL+"/engine-rest/user/"+params[0]+"/profile";
+            BufferedReader reader = null;
+            StringBuilder sb = new StringBuilder();
             try {
-                if (response != null) {
-                    if (response.toString().contains("token")) {
-                        Intent i= new Intent(OwnerLoginActivity.this,ApproveBookingActivity.class);
-                        i.putExtra("token",response.getString("token"));
-                        startActivity(i);
-                        Toast.makeText(getApplicationContext(), "Login success", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Login error", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                else
-                    Toast.makeText(getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
-            } catch (Exception e) {
-                e.printStackTrace();
-                Toast.makeText(activity, String.format("%s","Something went wrong!!!!!!"), Toast.LENGTH_LONG).show();
-
-            }
-            System.out.println(response);
-        }
-    }
-    /**
-     * Method allows to HTTP POST request to the server to send data to a specified resource
-     * @param REQUEST_URL URL of the API to be requested
-     * @param params parameter that are to be send in the "body" of the request Ex: parameter=value&amp;also=another
-     * returns response as a JSON object
-     */
-    public JSONObject post(String REQUEST_URL, Map<String, Object> params) {
-        JSONObject jsonObject = null;
-        BufferedReader reader = null;
-        try { URL url = new URL(REQUEST_URL);
-            System.out.println("params - "+params);
-            String postData = new ObjectMapper().writeValueAsString(params);
-            byte[] postDataBytes = postData.toString().getBytes("UTF-8");
-            System.out.println("postData - "+postData);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestProperty("Content-Type", "application/json");
-            connection.setRequestProperty("accept", "*/*");
-            connection.setConnectTimeout(8000);
-            connection.setRequestMethod("POST");
-            connection.setUseCaches(false);
-            connection.setDoOutput(true);
-            connection.getOutputStream().write(postDataBytes);
-            connection.connect();
-            StringBuilder sb;
-            int statusCode = connection.getResponseCode();
-            System.out.println("statusCode - "+statusCode);
-            if (statusCode == 200) {
-                sb = new StringBuilder();
-                reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
-                jsonObject = new JSONObject(sb.toString());
-            }
-            connection.disconnect();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (reader != null) {
+                System.out.println("USER_PROFILE - "+USER_PROFILE);
+                URL url;
+                HttpURLConnection urlConnection = null;
                 try {
-                    reader.close();
+                    url = new URL(USER_PROFILE);
+
+                    urlConnection = (HttpURLConnection) url
+                            .openConnection();
+
+                    InputStream in = urlConnection.getInputStream();
+
+                    InputStreamReader isw = new InputStreamReader(in);
+                    reader = new BufferedReader(isw);
+                    System.out.println("status code - "+urlConnection.getResponseCode());
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        sb.append(line);
+                    }
+                    return sb.toString();
+
                 } catch (Exception e) {
                     e.printStackTrace();
+                } finally {
+                    if (urlConnection != null) {
+                        urlConnection.disconnect();
+                    }
                 }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "Exception: " + e.getMessage();
             }
+            return sb.toString();
         }
-        return jsonObject;
     }
 }

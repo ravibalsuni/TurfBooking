@@ -86,6 +86,29 @@ public class RegisterActivity extends AppCompatActivity {
             JSONObject parent = new JSONObject();
             JSONObject child1 = new JSONObject();
             JSONObject child2 = new JSONObject();
+            Intent intent = getIntent();
+            String activityName=intent.getStringExtra("activity");
+            if (activityName.equals("UserLoginActivity")) {
+                try {
+                    child1.put("lastName", "user");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (activityName.equals("AdminLoginActivity")) {
+                try {
+                    child1.put("lastName", "admin");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (activityName.equals("OwnerLoginActivity")) {
+                try {
+                    child1.put("lastName", "owner");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
             try {
             child2.put("password", fPassword);
             child1.put("id", fPhone);
@@ -121,17 +144,23 @@ public class RegisterActivity extends AppCompatActivity {
                     if (response.toString().contains("SUCCESS") && activityName.equals("UserLoginActivity")) {
                         Intent i= new Intent(RegisterActivity.this, UserLoginActivity.class);
                         i.putExtra("activity","RegisterActivity");
+                        i.putExtra("userid",fPhone);
+                        i.putExtra("role","user");
                         startActivity(i);
                         Toast.makeText(getApplicationContext(), "Registration Successful", Toast.LENGTH_LONG).show();
                     } else if(response.toString().contains("SUCCESS") && activityName.equals("OwnerLoginActivity")) {
                         Intent i= new Intent(RegisterActivity.this, OwnerLoginActivity.class);
                         i.putExtra("activity","RegisterActivity");
+                        i.putExtra("userid",fPhone);
+                        i.putExtra("role","owner");
                         startActivity(i);
                         Toast.makeText(getApplicationContext(), "Registration Successful", Toast.LENGTH_LONG).show();
 
                     } else if(response.toString().contains("SUCCESS") && activityName.equals("AdminLoginActivity")) {
                         Intent i= new Intent(RegisterActivity.this, AdminLoginActivity.class);
                         i.putExtra("activity","RegisterActivity");
+                        i.putExtra("userid",fPhone);
+                        i.putExtra("role","admin");
                         startActivity(i);
                         Toast.makeText(getApplicationContext(), "Registration Successful", Toast.LENGTH_LONG).show();
                     }
@@ -149,12 +178,7 @@ public class RegisterActivity extends AppCompatActivity {
             System.out.println(response);
         }
     }
-    /**
-     * Method allows to HTTP POST request to the server to send data to a specified resource
-     * @param REQUEST_URL URL of the API to be requested
-     * @param params parameter that are to be send in the "body" of the request Ex: parameter=value&amp;also=another
-     * returns response as a JSON object
-     */
+
     public String post(String REQUEST_URL, Map<String, Object> params) {
         JSONObject jsonObject = null;
         BufferedReader reader = null;

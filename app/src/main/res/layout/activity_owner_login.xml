@@ -42,7 +42,7 @@
                 android:background="@android:color/transparent"
                 android:drawablePadding="12dp"
                 android:ems="10"
-                android:inputType="textEmailAddress"
+                android:inputType="number"
                 android:padding="8dp"
                 android:hint="owner user id (this is your phone)"
                 android:textColorHint="#ffffff"
