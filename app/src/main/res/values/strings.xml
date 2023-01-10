@@ -7,7 +7,7 @@
     <string name="nav_header_desc">Header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_my_booking">My Bookings</string>
+    <string name="menu_my_booking">My Pending Bookings</string>
     <string name="menu_book_now">Book Now</string>
     <string name="menu_booking_pending_for_approval">Booking Pending For Approval</string>
     <string name="menu_turf_pending_for_approval">Turf Pending For Approval</string>

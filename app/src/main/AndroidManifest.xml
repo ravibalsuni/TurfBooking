@@ -28,6 +28,7 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".TurfBookingActivity"/>
         <activity android:name=".UserLoginActivity"/>
+        <activity android:name=".ReportActivity"/>
     </application>
 
 </manifest>

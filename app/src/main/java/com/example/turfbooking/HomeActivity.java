@@ -8,7 +8,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class HomeActivity extends AppCompatActivity {
-    private Button userLoginButton,ownerLoginButton,adminLoginButton;
+    private Button userLoginButton,ownerLoginButton,adminLoginButton, reportGeneration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +18,8 @@ public class HomeActivity extends AppCompatActivity {
         userLoginButton = findViewById(R.id.btnLogin_user);
         ownerLoginButton = findViewById(R.id.btnLogin_owner);
         adminLoginButton = findViewById(R.id.btnLogin_admin);
+        reportGeneration = findViewById(R.id.btn_report);
+
         userLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,6 +41,14 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent admin = new Intent(HomeActivity.this,AdminLoginActivity.class);
                 startActivity(admin);
+            }
+        });
+
+        reportGeneration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent report = new Intent(HomeActivity.this,ReportActivity.class);
+                startActivity(report);
             }
         });
 

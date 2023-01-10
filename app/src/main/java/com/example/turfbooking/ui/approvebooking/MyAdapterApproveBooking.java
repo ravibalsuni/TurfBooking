@@ -1,4 +1,4 @@
-package com.example.turfbooking.ui.approveturf;
+package com.example.turfbooking.ui.approvebooking;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,19 +9,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.turfbooking.R;
+import com.example.turfbooking.ui.approveturf.ItemClickListener;
+import com.example.turfbooking.ui.mybooking.TurfBookingModel;
 
 import java.util.concurrent.ExecutionException;
 
-public class MyAdapterApproveTurf extends RecyclerView.Adapter<MyAdapterApproveTurf.MyViewHolder>{
+public class MyAdapterApproveBooking extends RecyclerView.Adapter<MyAdapterApproveBooking.MyViewHolder>{
 
     // 4- Handling the Click Events
     public ItemClickListener clickListener;
 
 
     // 1- Data Source
-    private TurfModel[] listData;
+    private TurfBookingModel[] listData;
 
-    public MyAdapterApproveTurf(TurfModel[] listData) {
+    public MyAdapterApproveBooking(TurfBookingModel[] listData) {
         this.listData = listData;
     }
 
@@ -36,9 +38,9 @@ public class MyAdapterApproveTurf extends RecyclerView.Adapter<MyAdapterApproveT
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.textView2 = itemView.findViewById(R.id.turf_name);
-            this.textView3 = itemView.findViewById(R.id.turf_status);
-            this.textView4 = itemView.findViewById(R.id.approve_turf);
+            this.textView2 = itemView.findViewById(R.id.approve_turf_id);
+            this.textView3 = itemView.findViewById(R.id.approve_booking_status);
+            this.textView4 = itemView.findViewById(R.id.approve_booking);
             itemView.setOnClickListener(this);
         }
 
@@ -64,7 +66,7 @@ public class MyAdapterApproveTurf extends RecyclerView.Adapter<MyAdapterApproveT
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater  = LayoutInflater.from(parent.getContext());
-        View listItem = inflater.inflate(R.layout.recyclerview_item,parent, false);
+        View listItem = inflater.inflate(R.layout.recyclerview_item_approve_booking,parent, false);
         MyViewHolder viewHolder = new MyViewHolder(listItem);
         return viewHolder;
 
@@ -72,9 +74,9 @@ public class MyAdapterApproveTurf extends RecyclerView.Adapter<MyAdapterApproveT
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-         holder.textView2.setText(listData[position].getName().toString());
-        holder.textView3.setText(listData[position].getTurfStatus().toString());
-        holder.textView4.setText("Tap to Approve");
+         holder.textView2.setText(listData[position].getTurfId().toString());
+        holder.textView3.setText(listData[position].getBookingStatus().toString());
+        holder.textView4.setText("Approve");
     }
 
     @Override

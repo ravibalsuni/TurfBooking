@@ -1,6 +1,7 @@
 package com.example.turfbooking.ui.mybooking;
 
 public class TurfBookingModel {
+    private Integer id;
     private String turfId;
     private String createdDateTime;
     private String bookingDateTime;
@@ -10,6 +11,14 @@ public class TurfBookingModel {
     private String bookingStatus;
     private String availabilityStatus;
     private String duration;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getTurfId() {
         return turfId;
