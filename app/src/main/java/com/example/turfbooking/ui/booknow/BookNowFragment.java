@@ -21,6 +21,7 @@ import com.example.turfbooking.UserLoginActivity;
 import com.example.turfbooking.constants.Constants;
 import com.example.turfbooking.databinding.FragmentApproveturfBinding;
 import com.example.turfbooking.databinding.FragmentBooknowBinding;
+import com.example.turfbooking.global.GlobalClass;
 import com.example.turfbooking.ui.approveturf.ApproveTurfFragment;
 import com.example.turfbooking.ui.approveturf.ItemClickListener;
 import com.example.turfbooking.ui.approveturf.MyAdapterApproveTurf;
@@ -47,6 +48,7 @@ public class BookNowFragment extends Fragment implements ItemClickListener {
     private FragmentBooknowBinding binding;
     int globalPos = 0;
     String userid;
+    String role;
 
     TurfModel[] myListData1;
 
@@ -58,6 +60,9 @@ public class BookNowFragment extends Fragment implements ItemClickListener {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         binding = FragmentBooknowBinding.inflate(inflater, container, false);
+        final GlobalClass globalVariable = (GlobalClass) getActivity().getApplicationContext();
+        userid  = globalVariable.getUserID();
+        role = globalVariable.getRole();
         View root = binding.getRoot();
         String result = "null";
         try {
@@ -110,9 +115,7 @@ public class BookNowFragment extends Fragment implements ItemClickListener {
         globalPos = pos;
         System.out.println("data based on pos - " + myListData1[globalPos]);
 
-        Intent i1 = getActivity().getIntent();
-        userid=i1.getStringExtra("userid");
-        System.out.println("user id - "+userid);
+        System.out.println("Global var user id - "+userid);
         String getResponse = new GetAsyncTask2().execute().get();
         System.out.println("getResponse - "+getResponse);
         if(getResponse.length() > 3) {
@@ -184,6 +187,7 @@ public class BookNowFragment extends Fragment implements ItemClickListener {
                 URL url;
                 HttpURLConnection urlConnection = null;
                 try {
+                    System.out.println("API-URL - "+API_URL);
                     url = new URL(API_URL);
 
                     urlConnection = (HttpURLConnection) url
@@ -234,7 +238,7 @@ public class BookNowFragment extends Fragment implements ItemClickListener {
             postData.put("bookingDateTime", new Date().toString());
             postData.put("bookingStatus","Pending");
             postData.put("bookingTimeslot","1");
-            postData.put("createdBy",i.getStringExtra("userid"));
+            postData.put("createdBy",userid);
             postData.put("createdDateTime",new Date().toString());
             postData.put("duration","1hr");
 

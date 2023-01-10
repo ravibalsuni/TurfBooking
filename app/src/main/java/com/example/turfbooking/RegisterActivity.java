@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.turfbooking.constants.Constants;
+import com.example.turfbooking.global.GlobalClass;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
@@ -144,23 +145,27 @@ public class RegisterActivity extends AppCompatActivity {
                     if (response.toString().contains("SUCCESS") && activityName.equals("UserLoginActivity")) {
                         Intent i= new Intent(RegisterActivity.this, UserLoginActivity.class);
                         i.putExtra("activity","RegisterActivity");
-                        i.putExtra("userid",fPhone);
-                        i.putExtra("role","user");
+                        final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
+                        globalVariable.setUserID(fPhone);
+                        globalVariable.setRole("user");
                         startActivity(i);
                         Toast.makeText(getApplicationContext(), "Registration Successful", Toast.LENGTH_LONG).show();
                     } else if(response.toString().contains("SUCCESS") && activityName.equals("OwnerLoginActivity")) {
                         Intent i= new Intent(RegisterActivity.this, OwnerLoginActivity.class);
                         i.putExtra("activity","RegisterActivity");
-                        i.putExtra("userid",fPhone);
-                        i.putExtra("role","owner");
+                        final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
+                        globalVariable.setUserID(fPhone);
+                        globalVariable.setRole("Owner");
+
                         startActivity(i);
                         Toast.makeText(getApplicationContext(), "Registration Successful", Toast.LENGTH_LONG).show();
 
                     } else if(response.toString().contains("SUCCESS") && activityName.equals("AdminLoginActivity")) {
                         Intent i= new Intent(RegisterActivity.this, AdminLoginActivity.class);
                         i.putExtra("activity","RegisterActivity");
-                        i.putExtra("userid",fPhone);
-                        i.putExtra("role","admin");
+                        final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
+                        globalVariable.setUserID(fPhone);
+                        globalVariable.setRole("user");
                         startActivity(i);
                         Toast.makeText(getApplicationContext(), "Registration Successful", Toast.LENGTH_LONG).show();
                     }
@@ -180,7 +185,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public String post(String REQUEST_URL, Map<String, Object> params) {
-        JSONObject jsonObject = null;
         BufferedReader reader = null;
         try { URL url = new URL(REQUEST_URL);
             System.out.println("params - "+params);

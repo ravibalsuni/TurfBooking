@@ -1,4 +1,4 @@
-package com.example.turfbooking.ui.booknow;
+package com.example.turfbooking.ui.mybooking;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,16 +14,16 @@ import com.example.turfbooking.ui.approveturf.TurfModel;
 
 import java.util.concurrent.ExecutionException;
 
-public class MyAdapterBookNow extends RecyclerView.Adapter<MyAdapterBookNow.MyViewHolder>{
+public class MyBookingAdapter extends RecyclerView.Adapter<MyBookingAdapter.MyViewHolder>{
 
     // 4- Handling the Click Events
     public ItemClickListener clickListener;
 
 
     // 1- Data Source
-    private TurfModel[] listData;
+    private TurfBookingModel[] listData;
 
-    public MyAdapterBookNow(TurfModel[] listData) {
+    public MyBookingAdapter(TurfBookingModel[] listData) {
         this.listData = listData;
     }
 
@@ -38,9 +38,9 @@ public class MyAdapterBookNow extends RecyclerView.Adapter<MyAdapterBookNow.MyVi
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.textView2 = itemView.findViewById(R.id.turf_name);
-            this.textView3 = itemView.findViewById(R.id.turf_status);
-            this.textView4 = itemView.findViewById(R.id.approve_turf);
+            this.textView2 = itemView.findViewById(R.id.created_by);
+            this.textView3 = itemView.findViewById(R.id.booking_status);
+            this.textView4 = itemView.findViewById(R.id.date);
             itemView.setOnClickListener(this);
         }
 
@@ -66,7 +66,7 @@ public class MyAdapterBookNow extends RecyclerView.Adapter<MyAdapterBookNow.MyVi
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater  = LayoutInflater.from(parent.getContext());
-        View listItem = inflater.inflate(R.layout.recyclerview_item_book_now,parent, false);
+        View listItem = inflater.inflate(R.layout.recyclerview_item_my_booking,parent, false);
         MyViewHolder viewHolder = new MyViewHolder(listItem);
         return viewHolder;
 
@@ -74,9 +74,9 @@ public class MyAdapterBookNow extends RecyclerView.Adapter<MyAdapterBookNow.MyVi
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-         holder.textView2.setText(listData[position].getName().toString());
-        holder.textView3.setText(listData[position].getPin().toString());
-        holder.textView4.setText("Book Now");
+         holder.textView2.setText(listData[position].getCreatedBy().toString());
+        holder.textView3.setText(listData[position].getBookingStatus().toString());
+        holder.textView4.setText(listData[position].getBookingDate().toString().split("GMT")[0]);
     }
 
     @Override

@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.turfbooking.constants.Constants;
+import com.example.turfbooking.global.GlobalClass;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.json.JSONObject;
@@ -70,8 +71,9 @@ public class OwnerLoginActivity extends AppCompatActivity {
                     if (response != null) {
                         if (response.toString().contains("owner")) {
                             Intent i= new Intent(OwnerLoginActivity.this, ApproveBookingActivity.class);
-                            i.putExtra("role","admin");
-                            i.putExtra("userid", phone);
+                            final GlobalClass globalVariableO = (GlobalClass) getApplicationContext();
+                            globalVariableO.setUserID(phone);
+                            globalVariableO.setRole("owner");
                             startActivity(i);
                             Toast.makeText(getApplicationContext(), "Login success", Toast.LENGTH_LONG).show();
                         } else {

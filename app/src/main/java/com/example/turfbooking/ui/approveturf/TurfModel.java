@@ -1,7 +1,5 @@
 package com.example.turfbooking.ui.approveturf;
 
-import android.content.Intent;
-
 public class TurfModel {
     private Integer id;
     private String name;
