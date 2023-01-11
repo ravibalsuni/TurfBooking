@@ -36,7 +36,7 @@ import java.net.URL;
 public class ReportActivity extends AppCompatActivity {
     private Button turfReportButton,bookingReportButton;
 
-    int pageHeight = 1120;
+    int pageHeight = 5120;
     int pagewidth = 792;
 
     Bitmap bmp, scaledbmp;
@@ -119,7 +119,7 @@ public class ReportActivity extends AppCompatActivity {
         title.setColor(ContextCompat.getColor(this, R.color.purple_200));
 
 
-        canvas.drawText("For Sports Professionals!", 209, 100, title);
+        canvas.drawText("For \r\n Sports \r\nProfessionals!", 209, 100, title);
         canvas.drawText("Book My Turf", 209, 80, title);
 
         title.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
@@ -129,7 +129,11 @@ public class ReportActivity extends AppCompatActivity {
 
         title.setTextAlign(Paint.Align.LEFT);
         System.out.println("data before canvas -"+data);
-        canvas.drawText(data, 396, 560, title);
+        int x = 200, y = 200;
+        for (String line: data.split("\n")) {
+            canvas.drawText(line, x, y, title);
+            y += title.descent() - title.ascent();
+        }
         pdfDocument.finishPage(myPage);
         File directory = new ContextWrapper(getApplicationContext()).getExternalFilesDir("Downloads");
         File file = new File(directory, name);
